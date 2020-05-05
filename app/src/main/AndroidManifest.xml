@@ -23,7 +23,9 @@
             android:name="com.panw.lab.antipluginsdk.AntiCheckCases.AntiCheckMainService"
             android:enabled="true"
             android:exported="true">
-            <action android:name="com.android.broadcast.ANTI_STATIC_STICKY" />
+            <intent-filter>
+                <action android:name="com.android.broadcast.ANTI_STATIC_STICKY" />
+            </intent-filter>
         </service>
 
         <service

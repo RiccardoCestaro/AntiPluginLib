@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.panw.lab.antipluginsdk.AntiMain;
 
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         AntiMain checker = new AntiMain(this);
         checker.isPlugin();
+        Log.i("Anti","DiCiao");
+
+        String change = "ciao";
+        TextView tv = (TextView) findViewById(R.id.toChange);
+        tv.setText(change);
     }
 
     @Override

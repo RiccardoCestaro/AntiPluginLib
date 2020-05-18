@@ -109,6 +109,8 @@ public class AntiCheckMainService extends Service {
         IntentFilter filter=new IntentFilter();
         filter.addAction("com.android.broadcast.RESULT");
         this.registerReceiver(mReceiver, filter);
+
+
     }
 
     @Override
@@ -117,6 +119,7 @@ public class AntiCheckMainService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.i("Anti","CiaoSonoInOnStartCommandInAntiCheckMainService");
         if(intent.getAction() == null) {
             super.onStartCommand(intent, flags, startId);
             prepareReceiver();

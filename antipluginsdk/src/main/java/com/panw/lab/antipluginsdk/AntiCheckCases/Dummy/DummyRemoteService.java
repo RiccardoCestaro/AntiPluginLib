@@ -16,6 +16,7 @@ public class DummyRemoteService extends Service {
     @Override
     public void onCreate() {
         this.myPid = Process.myPid();
+        Log.i("Anti","CiaoSonoIlDummyRemoteService");
         ActivityManager manager = (ActivityManager) this.getSystemService(Context.ACTIVITY_SERVICE);
         Log.i("Anti","DummyRemoteService -> onCreate, Thread: " + Thread.currentThread().getName());
         ActivityManager.RunningAppProcessInfo myProcessInfo = getRunningAppProcessInfo(manager, myPid);

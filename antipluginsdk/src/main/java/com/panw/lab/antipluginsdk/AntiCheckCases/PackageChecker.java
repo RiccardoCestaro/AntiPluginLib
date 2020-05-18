@@ -28,11 +28,16 @@ public class PackageChecker {
             Context context,
             PackageManager pm) {
         String pkgName = context.getApplicationContext().getPackageName();
+        Log.i("Anti","PACKAGENAME!!!!         " + pkgName + "   PACKAGENAME!!!!!!!!!!!");
         ActivityManager am = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-        //undeclaredPermissionCheck(context, pm);
+        undeclaredPermissionCheck(context, pm);
+        listAll(context,pm);
         checkUIDProcess(context, am, pkgName);
         checkAppRuntimeDir(context, pm, pkgName);
         getCurrentProcessInfo3(context);
+
+
+        Log.i("PackageChecker","CIAOSONOILPACKAGECHECKER!!!");
     }
     public boolean listAll(Context context,
                            PackageManager pm){
@@ -139,6 +144,8 @@ public class PackageChecker {
             boolean dataDir_wrong = !ai.dataDir.startsWith("/data/data/" + pkgName);
             boolean srcDir_wrong = !ai.sourceDir.startsWith("/data/app/" + pkgName);
             boolean pSrcDir_wrong = !ai.publicSourceDir.startsWith("/data/app/" + pkgName);
+            Log.i("Anti", "\t\t" +(dataDir_wrong | srcDir_wrong | pSrcDir_wrong) + "       CHECKAPPRUNTIMEDIR!!!!!!");
+
 
             phoneback(context, "result", "", ""+(dataDir_wrong | srcDir_wrong | pSrcDir_wrong), "checkAppRuntimeDir");
         } catch (PackageManager.NameNotFoundException e) {
@@ -169,11 +176,13 @@ public class PackageChecker {
         Log.i("Anti", "All Processes with the same UID");
         List<String> unknown_proc = new ArrayList<>();
         for (ActivityManager.RunningAppProcessInfo appProcess : am.getRunningAppProcesses()){
-            Log.i("Anti", "\t\tuid:("+appProcess.uid+")|pid("+appProcess.pid+")|Name("+appProcess.processName+")");
+            Log.i("Anti", "\t\tuid:("+appProcess.uid+")|pid("+appProcess.pid+")|Name("+appProcess.processName+")" + "       CHECKUIDPROCESS!!!!!!");
             if(!appProcess.processName.contains(pkgName)){
                 unknown_proc.add(appProcess.uid+"_"+appProcess.pid+"_"+appProcess.processName);
+                Log.i("Anti", "\t\tuid:("+appProcess.uid+")|pid("+appProcess.pid+")|Name("+appProcess.processName+")" + "       UNKNOWN!!!!!!!!!!!");
             }
         }
+
         phoneback(context, "result", "", ""+(unknown_proc.size() > 0), "checkUIDProcess");
         //uid:(10069)|pid(18588)|Name(clwang.chunyu.me.wcl_droid_plugin_demo)
         //uid:(10069)|pid(18742)|Name(com.panw.lab.antidemo)
@@ -191,7 +200,7 @@ public class PackageChecker {
         allPerms.removeAll(requestedPerms);
         for (String perm : allPerms) {
             if(ContextCompat.checkSelfPermission(context, perm) == 0) {
-                //Log.d("Anti", "     perm:" + perm);
+                Log.d("Anti", "     permission:" + perm + "    UNDECLAREDD!!!!!!!! ");
                 found_undeclared = true;
             }
         }
@@ -240,7 +249,7 @@ public class PackageChecker {
                 List<PermissionInfo> lstPermissions = pm.queryPermissionsByGroup(pgi.name, 0);
                 for (PermissionInfo pi : lstPermissions) {
                     csPermissionLabel = pi.loadLabel(pm);
-                    //Log.e("Anti", "   " + pi.name + ": " + csPermissionLabel.toString());
+                    Log.e("Anti", "   " + pi.name + ": " + csPermissionLabel.toString());
                     perms.add(pi.name);
                 }
             } catch (Exception ex) {

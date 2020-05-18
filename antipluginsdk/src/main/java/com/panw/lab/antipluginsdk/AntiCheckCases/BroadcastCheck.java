@@ -40,7 +40,7 @@ public class BroadcastCheck {
         ctx.startActivity(dialogIntent);
     }
 
-    public void checkEnabledComp(Context ctx) {
+    public void checkEnabledComp(Context ctx) { // 3.c
         Log.w("Anti", "+[Broadcast-Check] [checkEnabledComp] Begin");
         ctx.getPackageManager().setComponentEnabledSetting(
                 new ComponentName(ctx, receiver_name),
@@ -50,6 +50,9 @@ public class BroadcastCheck {
         ctx.sendBroadcast(static_intent);
 
         SystemClock.sleep(5000);
+
+        Log.i("Anti","CHECKENABLEDCOMPONENT     " + staticACTION + "           CHECKENABLEDCOMPONENT");
+
         phoneback(ctx, "c2", "DummyReceiver-" + staticACTION, "1", "checkEnabledComp");
     }
 
@@ -60,6 +63,9 @@ public class BroadcastCheck {
         ctx.sendBroadcast(static_intent);
 
         SystemClock.sleep(5000);
+
+        Log.i("Anti","CHECKUNREGISTEREDFILTER     " + staticACTION + "           CHECKUNREGISTEREDFILTER");
+
         phoneback(ctx, "c2", "DummyReceiver-" + staticACTION, "1", "checkUnregisteredFilter");
     }
 
